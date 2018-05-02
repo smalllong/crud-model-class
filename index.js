@@ -1,0 +1,39 @@
+class ModelAttr {
+  constructor (prop, label, type, extra) {
+    this.prop = prop
+    this.label = label
+    this.type = type || 'text' // text|textarea|select|bool|int|natural|tel|date|time|file|image|...
+    this.maxLength = 255
+    if (extra) Object.assign(this, extra)
+    if (this.mapper) {
+      this.formatter = function (row, column, cellValue) {
+        return this.mapper[cellValue]
+      }
+    }
+    /*
+    extra = {
+      default: any, //新增时填入的默认值
+      disableEdit: boolean, //是否禁止编辑
+      hideInInsert: boolean, //新增里隐藏
+      hideInEdit: boolean, //编辑里隐藏
+      hideInTable: boolean, //不在表格显示
+      mapper: Object, //映射对象
+      minWidth: number, //表格列最小宽度
+      maxLength: number, //最大长度
+      multiInsert: boolean, //若为true，新增时根据此字段执行多次insert，目前只对date类型有效
+      required: boolean, //是否必填
+      sortable: boolean, //表格列是否可排序
+      tableOnly: boolean, //只在表格显示，不可添加和编辑
+    }
+    */
+  }
+}
+
+export default class Model extends Array {
+  constructor (src) {
+    super()
+    for (var i in src) {
+      this.push(new ModelAttr(i, ...src[i]))
+    }
+  }
+}

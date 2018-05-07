@@ -5,6 +5,7 @@ class ModelAttr {
     this.type = type || 'text' // text|textarea|select|bool|int|natural|tel|date|time|file|image|...
     this.maxLength = 255
     if (extra) Object.assign(this, extra)
+    this.extraRules = this.extraRules || []
     if (this.mapper) {
       this.formatter = function (row, column, cellValue) {
         return this.mapper[cellValue]
@@ -14,6 +15,7 @@ class ModelAttr {
     extra = {
       default: any, //新增时填入的默认值
       disableEdit: boolean, //是否禁止编辑
+      extraRules: Array, //额外校验规则
       hideInInsert: boolean, //新增里隐藏
       hideInEdit: boolean, //编辑里隐藏
       hideInTable: boolean, //不在表格显示
@@ -35,5 +37,12 @@ export default class Model extends Array {
     for (var i in src) {
       this.push(new ModelAttr(i, ...src[i]))
     }
+    this.rules = {}
+    this.forEach(attr => {
+      this.rules[attr.prop] = [{
+        required: attr.required,
+        message: '必填',
+      }, ...attr.extraRules]
+    })
   }
 }

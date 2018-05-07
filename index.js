@@ -24,6 +24,7 @@ class ModelAttr {
       maxLength: number, //最大长度
       multiInsert: boolean, //若为true，新增时根据此字段执行多次insert，目前只对date类型有效
       required: boolean, //是否必填
+      ruleType: string, //校验的类型
       sortable: boolean, //表格列是否可排序
       tableOnly: boolean, //只在表格显示，不可添加和编辑
     }
@@ -40,6 +41,7 @@ export default class Model extends Array {
     this.rules = {}
     this.forEach(attr => {
       this.rules[attr.prop] = [{
+        type: attr.ruleType,
         required: attr.required,
         message: '必填',
       }, ...attr.extraRules]

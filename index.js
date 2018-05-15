@@ -6,7 +6,7 @@ class ModelAttr {
     this.maxLength = 255
     if (extra) Object.assign(this, extra)
     this.extraRules = this.extraRules || []
-    if (this.mapper) {
+    if (this.mapper && !this.removeFormatter) {
       this.formatter = function (row, column, cellValue) {
         return this.mapper[cellValue]
       }
@@ -23,6 +23,7 @@ class ModelAttr {
       minWidth: number, //表格列最小宽度
       maxLength: number, //最大长度
       multiInsert: boolean, //若为true，新增时根据此字段执行多次insert，目前只对date类型有效
+      removeFormatter: boolean, //是否不生成formatter
       required: boolean, //是否必填
       ruleType: string, //校验的类型
       sortable: boolean, //表格列是否可排序

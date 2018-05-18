@@ -1,15 +1,26 @@
 {
   "name": "crud-model-class",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "a model class that's useful in crud components",
-  "main": "index.js",
+  "main": "index.min.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/smalllong/crud-model-class.git"
   },
   "scripts": {
+    "build": "babel index.js --out-file index.min.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "lixiaolong",
-  "license": "ISC"
+  "license": "ISC",
+  "browserslist": [
+    "> 2%",
+    "last 2 versions",
+    "firefox >= 26"
+  ],
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-minify": "^0.4.3"
+  }
 }

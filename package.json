@@ -13,11 +13,6 @@
   },
   "author": "lixiaolong",
   "license": "ISC",
-  "browserslist": [
-    "> 2%",
-    "last 2 versions",
-    "firefox >= 26"
-  ],
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",

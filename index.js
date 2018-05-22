@@ -2,10 +2,21 @@ class ModelAttr {
   constructor (prop, label, type, extra) {
     this.prop = prop
     this.label = label
-    this.type = type || 'text' // text|textarea|select|bool|int|natural|tel|date|time|file|image|...
+
+    this.type = type || 'text' // text|textarea|select|bool|int|natural|tel|date|time|file|image|parent|...
+    if (this.type == 'parent') {
+      var childAttrs = []
+      for (var i in extra.children) {
+        childAttrs.push(new ModelAttr(i, ...extra.children[i]))
+      }
+      extra.children = childAttrs
+    }
+
     this.maxLength = 255
+
     if (extra) Object.assign(this, extra)
     this.extraRules = this.extraRules || []
+
     if (this.mapper && !this.removeFormatter) {
       this.formatter = function (row, column, cellValue) {
         return this.mapper[cellValue]
@@ -13,6 +24,7 @@ class ModelAttr {
     }
     /*
     extra = {
+      children: Object, //只有parent类型才能设置，
       default: any, //新增时填入的默认值
       disableEdit: boolean, //是否禁止编辑
       extraRules: Array, //额外校验规则

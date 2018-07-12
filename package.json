@@ -1,6 +1,6 @@
 {
   "name": "crud-model-class",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "a model class that's useful in crud components",
   "main": "index.min.js",
   "repository": {

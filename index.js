@@ -55,7 +55,7 @@ export default class Model extends Array {
     this.forEach(attr => {
       this.rules[attr.prop] = [{
         type: attr.ruleType,
-        required: attr.required,
+        required: attr.required||false,
         message: '必填',
       }, ...attr.extraRules]
     })

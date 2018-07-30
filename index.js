@@ -54,9 +54,10 @@ export default class Model extends Array {
     this.rules = {}
     this.forEach(attr => {
       this.rules[attr.prop] = [{
-        type: attr.ruleType,
-        required: attr.required||false,
+        type: attr.ruleType, //解决async-validator默认验证为字符串类型的问题
+        required: attr.required||false, //解决async-validator传入undefined时效果不等于false
         message: '必填',
+        trigger: 'blur',
       }, ...attr.extraRules]
     })
   }

@@ -14,7 +14,10 @@ class ModelAttr {
 
     this.maxLength = 255
 
-    if (extra) Object.assign(this, extra)
+    if (extra) {
+      for (var i in extra)
+        this[i] = extra[i]
+    }
     this.extraRules = this.extraRules || []
 
     if (this.mapper && !this.removeFormatter) {

@@ -14,7 +14,7 @@
           mapper: { 1: '未审核', 2: '已通过', 3: '未通过' },
           minWidth: 70,
           tableOnly: true,
-          defualt: '1'
+          default: '1'
         }
       ],
       title: ['标题文字', null, { minWidth: 120, required: true }],
